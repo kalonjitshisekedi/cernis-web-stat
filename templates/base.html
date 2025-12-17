@@ -23,13 +23,13 @@
     <meta name="twitter:description" content="{{ page.og_description | default(page.meta_description) }}">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
     
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} Insights" href="{{ site.url }}/feed.xml">
     
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
     
     <!-- Google Analytics (gtag.js) -->
     {% if site.google_analytics_id %}
@@ -85,6 +85,6 @@
     
     {% include 'partials/footer.html' %}
     
-    <script src="static/main.js"></script>
+    <script src="/static/main.js"></script>
 </body>
 </html>
