@@ -21,6 +21,30 @@ A professional B2B static website for CERNIS technology consultancy in South Afr
 
 4. Open http://localhost:5000 in your browser.
 
+## Setting SITE_URL
+
+The site uses a `SITE_URL` environment variable for generating absolute URLs in:
+- Canonical links
+- OpenGraph meta tags
+- RSS feed links
+- Sitemap URLs
+
+**Default**: `https://cernis.co.za` (production domain)
+
+**For local development**:
+```bash
+export SITE_URL="http://localhost:5000"
+python build.py
+```
+
+**For staging/preview**:
+```bash
+export SITE_URL="https://staging.cernis.co.za"
+python build.py
+```
+
+The environment variable takes precedence; if not set, it falls back to the production domain.
+
 ## Project structure
 
 ```

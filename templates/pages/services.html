@@ -13,7 +13,7 @@
     <div class="container">
         <div class="service-detail-header">
             <div class="service-icon-large">
-                <img src="{{ service.icon }}" alt="{{ service.title }} icon" width="80" height="80">
+                <img src="/{{ service.icon }}" alt="{{ service.title }} icon" width="80" height="80">
             </div>
             <div>
                 <h2>{{ service.title }}</h2>
@@ -48,7 +48,7 @@
     <div class="container">
         <h2>{{ cta_section.headline }}</h2>
         <p>{{ cta_section.text }}</p>
-        <a href="{{ cta_section.button_url }}" class="btn btn-primary">{{ cta_section.button_text }}</a>
+        <a href="/{{ cta_section.button_url }}" class="btn btn-primary">{{ cta_section.button_text }}</a>
     </div>
 </section>
 {% endblock %}

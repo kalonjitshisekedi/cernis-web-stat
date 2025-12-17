@@ -5,12 +5,17 @@ Single source of truth for all site content, metadata, and navigation.
 Edit this file to update website content, then run `python build.py`.
 """
 
+import os
+
+# Site URL: environment variable first, fallback to production domain
+SITE_URL = os.environ.get('SITE_URL', 'https://cernis.co.za')
+
 # Site metadata
 SITE = {
     "name": "CERNIS",
     "tagline": "Technology solutions that reduce costs and drive effectiveness",
     "description": "CERNIS helps South African organisations reduce technology costs and operate more effectively through integrated cloud, data and software solutions.",
-    "url": "https://www.cernis.co.za",
+    "url": SITE_URL,
     "locale": "en_ZA",
     "twitter": "@cernis_za",
     "google_analytics_id": "",  # Add your GA4 measurement ID (e.g., G-XXXXXXXXXX)

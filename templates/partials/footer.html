@@ -2,8 +2,8 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="index.html" class="logo" aria-label="{{ site.name }} home">
-                    <img src="static/logo-placeholder.svg" alt="{{ site.name }}" width="120" height="40">
+                <a href="/index.html" class="logo" aria-label="{{ site.name }} home">
+                    <img src="/static/logo-placeholder.svg" alt="{{ site.name }}" width="120" height="40">
                 </a>
                 <p class="footer-tagline">{{ site.tagline }}</p>
             </div>
@@ -13,7 +13,7 @@
                     <h3>Company</h3>
                     <ul>
                         {% for link in footer_links.company %}
-                        <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+                        <li><a href="/{{ link.url }}">{{ link.label }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -22,7 +22,7 @@
                     <h3>Services</h3>
                     <ul>
                         {% for link in footer_links.services %}
-                        <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+                        <li><a href="/{{ link.url }}">{{ link.label }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -41,7 +41,7 @@
             <p>&copy; {{ current_year }} {{ site.name }}. All rights reserved.</p>
             <ul class="legal-links">
                 {% for link in footer_links.legal %}
-                <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+                <li><a href="/{{ link.url }}">{{ link.label }}</a></li>
                 {% endfor %}
             </ul>
         </div>

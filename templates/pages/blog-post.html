@@ -30,8 +30,8 @@
     <header class="blog-post__header">
         <div class="container">
             <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="index.html">Home</a> / 
-                <a href="insights.html">Insights</a> / 
+                <a href="/index.html">Home</a> / 
+                <a href="/insights.html">Insights</a> / 
                 <span>{{ post.title }}</span>
             </nav>
             <h1>{{ post.title }}</h1>
@@ -53,7 +53,7 @@
                 <p>Written by <strong>{{ post.author }}</strong></p>
             </div>
             <div class="blog-post__cta">
-                <p>Have questions about this topic? <a href="contact.html">Get in touch</a> with our team.</p>
+                <p>Have questions about this topic? <a href="/contact.html">Get in touch</a> with our team.</p>
             </div>
         </footer>
     </div>
@@ -63,7 +63,7 @@
     <div class="container">
         <h2>{{ cta_section.headline }}</h2>
         <p>{{ cta_section.text }}</p>
-        <a href="{{ cta_section.button_url }}" class="btn btn--primary">{{ cta_section.button_text }}</a>
+        <a href="/{{ cta_section.button_url }}" class="btn btn--primary">{{ cta_section.button_text }}</a>
     </div>
 </section>
 {% endblock %}

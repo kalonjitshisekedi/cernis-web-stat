@@ -13,8 +13,8 @@ This document provides guidance on domain and email setup for the CERNIS website
 
 ### Apex domain vs www
 
-- **Apex domain**: `cernis.co.uk` (no subdomain)
-- **www subdomain**: `www.cernis.co.uk`
+- **Apex domain**: `cernis.co.za` (no subdomain)
+- **www subdomain**: `www.cernis.co.za`
 
 For S3 static hosting with a custom domain:
 - Apex domains require Route 53 ALIAS records or a DNS provider that supports ALIAS/ANAME
@@ -22,13 +22,13 @@ For S3 static hosting with a custom domain:
 
 ### Recommended setup
 
-1. **Primary domain**: `www.cernis.co.uk` (CloudFront distribution)
-2. **Redirect**: `cernis.co.uk` → `www.cernis.co.uk`
+1. **Primary domain**: `www.cernis.co.za` (CloudFront distribution)
+2. **Redirect**: `cernis.co.za` → `www.cernis.co.za`
 
 Or:
 
-1. **Primary domain**: `cernis.co.uk` (CloudFront distribution)
-2. **Redirect**: `www.cernis.co.uk` → `cernis.co.uk`
+1. **Primary domain**: `cernis.co.za` (CloudFront distribution)
+2. **Redirect**: `www.cernis.co.za` → `cernis.co.za`
 
 ### DNS records for CloudFront
 
@@ -67,11 +67,11 @@ Each provider will give you specific records, but typically:
 ```
 Type    Name        Value
 ----    ----        -----
-MX      @           cernis-co-uk.mail.protection.outlook.com (Priority: 0)
+MX      @           cernis-co-za.mail.protection.outlook.com (Priority: 0)
 TXT     @           v=spf1 include:spf.protection.outlook.com -all
-CNAME   selector1._domainkey    selector1-cernis-co-uk._domainkey.cernis.onmicrosoft.com
-CNAME   selector2._domainkey    selector2-cernis-co-uk._domainkey.cernis.onmicrosoft.com
-TXT     _dmarc      v=DMARC1; p=quarantine; rua=mailto:dmarc@cernis.co.uk
+CNAME   selector1._domainkey    selector1-cernis-co-za._domainkey.cernis.onmicrosoft.com
+CNAME   selector2._domainkey    selector2-cernis-co-za._domainkey.cernis.onmicrosoft.com
+TXT     _dmarc      v=DMARC1; p=quarantine; rua=mailto:dmarc@cernis.co.za
 ```
 
 ### Example records (Google Workspace)
@@ -84,7 +84,7 @@ MX      @           alt1.aspmx.l.google.com (Priority: 5)
 MX      @           alt2.aspmx.l.google.com (Priority: 5)
 TXT     @           v=spf1 include:_spf.google.com ~all
 TXT     google._domainkey   (provided by Google)
-TXT     _dmarc      v=DMARC1; p=quarantine; rua=mailto:dmarc@cernis.co.uk
+TXT     _dmarc      v=DMARC1; p=quarantine; rua=mailto:dmarc@cernis.co.za
 ```
 
 ---
