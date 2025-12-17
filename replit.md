@@ -32,6 +32,25 @@ A professional B2B static website for CERNIS technology consultancy in South Afr
 - **Install dependencies**: `pip install -r requirements.txt`
 - **Preview locally**: `cd output && python -m http.server 5000`
 
+## SITE_URL Configuration
+
+The site uses a `SITE_URL` environment variable for generating absolute URLs:
+
+```bash
+# Production (default if not set)
+# Uses https://cernis.co.za
+
+# Local development
+export SITE_URL="http://localhost:5000"
+python build.py
+
+# Staging/Preview
+export SITE_URL="https://staging.cernis.co.za"
+python build.py
+```
+
+This affects: canonical links, OpenGraph URLs, RSS feed links, and sitemap URLs.
+
 ## How to Update Content
 
 1. Edit `site_config.py` to change text, navigation, or metadata
@@ -105,6 +124,9 @@ SITE = {
 
 ## Recent Changes
 
+- December 2025: Added SITE_URL env variable support for absolute URLs
+- December 2025: Fixed asset paths for nested routes (blog posts)
+- December 2025: Completed UK to South Africa localisation sweep
 - December 2025: South African localisation (domain, phone, address, POPIA compliance)
 - December 2025: Added blog infrastructure with 3 SA-focused articles
 - December 2025: Added RSS feed generation
