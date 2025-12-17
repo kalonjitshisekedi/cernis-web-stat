@@ -1,0 +1,23 @@
+<header class="site-header">
+    <div class="container">
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="index.html" class="logo" aria-label="{{ site.name }} home">
+                <img src="static/logo-placeholder.svg" alt="{{ site.name }}" width="120" height="40">
+            </a>
+            
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+                <span class="nav-toggle-icon"></span>
+            </button>
+            
+            <ul id="nav-menu" class="nav-menu">
+                {% for item in nav_items %}
+                <li>
+                    <a href="{{ item.url }}" {% if item.id == current_page %}class="active" aria-current="page"{% endif %}>
+                        {{ item.label }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</header>

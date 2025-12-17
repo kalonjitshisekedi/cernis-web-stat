@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>{{ page.headline }}</h1>
+        <p class="page-meta">Last updated: {{ page.last_updated }}</p>
+    </div>
+</section>
+
+<section class="legal-content">
+    <div class="container container-narrow">
+        {{ page.content | safe }}
+    </div>
+</section>
+{% endblock %}

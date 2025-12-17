@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>{{ page.headline }}</h1>
+        <p class="page-intro">{{ page.intro }}</p>
+    </div>
+</section>
+
+<section class="about-story">
+    <div class="container">
+        <div class="about-content">
+            {{ page.story | trim | replace('\n\n', '</p><p>') | safe }}
+        </div>
+    </div>
+</section>
+
+<section class="values section-light">
+    <div class="container">
+        <h2 class="section-title">Our values</h2>
+        <div class="values-grid">
+            {% for value in page.company_values %}
+            <div class="value-card">
+                <h3>{{ value.title }}</h3>
+                <p>{{ value.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>{{ cta_section.headline }}</h2>
+        <p>{{ cta_section.text }}</p>
+        <a href="{{ cta_section.button_url }}" class="btn btn-primary">{{ cta_section.button_text }}</a>
+    </div>
+</section>
+{% endblock %}

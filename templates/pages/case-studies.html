@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>{{ page.headline }}</h1>
+        <p class="page-intro">{{ page.intro }}</p>
+    </div>
+</section>
+
+<section class="case-studies-list">
+    <div class="container">
+        {% for case in case_studies %}
+        <article class="case-study-card {% if loop.index is odd %}{% else %}reverse{% endif %}">
+            <div class="case-study-image">
+                <img src="{{ case.image }}" alt="{{ case.title }} illustration" width="400" height="300">
+            </div>
+            <div class="case-study-content">
+                <span class="case-study-industry">{{ case.industry }}</span>
+                <h2>{{ case.title }}</h2>
+                <p class="case-study-summary">{{ case.summary }}</p>
+                
+                <div class="case-study-details">
+                    <h3>The challenge</h3>
+                    <p>{{ case.challenge }}</p>
+                    
+                    <h3>Our solution</h3>
+                    <p>{{ case.solution }}</p>
+                    
+                    <h3>Results</h3>
+                    <ul>
+                        {% for result in case.results %}
+                        <li>{{ result }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>{{ cta_section.headline }}</h2>
+        <p>{{ cta_section.text }}</p>
+        <a href="{{ cta_section.button_url }}" class="btn btn-primary">{{ cta_section.button_text }}</a>
+    </div>
+</section>
+{% endblock %}

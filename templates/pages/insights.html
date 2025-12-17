@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>{{ page.headline }}</h1>
+        <p class="page-intro">{{ page.intro }}</p>
+    </div>
+</section>
+
+<section class="insights-placeholder">
+    <div class="container">
+        <div class="coming-soon-card">
+            <h2>Coming soon</h2>
+            <p>{{ page.coming_soon }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>{{ cta_section.headline }}</h2>
+        <p>{{ cta_section.text }}</p>
+        <a href="{{ cta_section.button_url }}" class="btn btn-primary">{{ cta_section.button_text }}</a>
+    </div>
+</section>
+{% endblock %}

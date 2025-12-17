@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+  <rect width="500" height="400" fill="#F8FAFC"/>
+  <rect x="50" y="50" width="400" height="300" rx="8" fill="#E2E8F0"/>
+  <circle cx="150" cy="150" r="40" fill="#14B8A6" opacity="0.3"/>
+  <circle cx="300" cy="120" r="60" fill="#0B1F3B" opacity="0.2"/>
+  <rect x="100" y="220" width="120" height="80" rx="4" fill="#14B8A6" opacity="0.4"/>
+  <rect x="250" y="200" width="150" height="100" rx="4" fill="#0B1F3B" opacity="0.3"/>
+  <text x="250" y="370" font-family="system-ui, sans-serif" font-size="14" fill="#475569" text-anchor="middle">Hero image placeholder</text>
+</svg>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.meta_description }}">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ page.og_title | default(page.title) }}">
+    <meta property="og:description" content="{{ page.og_description | default(page.meta_description) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}/{{ current_page }}.html">
+    <meta property="og:locale" content="{{ site.locale }}">
+    <meta property="og:site_name" content="{{ site.name }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    
+    {% include 'partials/nav.html' %}
+    
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    
+    {% include 'partials/footer.html' %}
+    
+    <script src="static/main.js"></script>
+</body>
+</html>

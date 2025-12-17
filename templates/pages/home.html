@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>{{ page.hero_headline }}</h1>
+            <p class="hero-subtitle">{{ page.hero_subheadline }}</p>
+            <a href="{{ page.hero_cta_url }}" class="btn btn-accent">{{ page.hero_cta }}</a>
+        </div>
+        <div class="hero-image">
+            <img src="static/hero-placeholder.svg" alt="Technology solutions illustration" width="500" height="400">
+        </div>
+    </div>
+</section>
+
+<section class="outcomes section-light">
+    <div class="container">
+        <h2 class="section-title">What we deliver</h2>
+        <div class="outcomes-grid">
+            {% for outcome in key_outcomes %}
+            <div class="outcome-card">
+                <h3>{{ outcome.title }}</h3>
+                <p>{{ outcome.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="services-overview">
+    <div class="container">
+        <h2 class="section-title">Our services</h2>
+        <p class="section-intro">We deliver integrated solutions across cloud, data, and software development.</p>
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="{{ service.icon }}" alt="{{ service.title }} icon" width="64" height="64">
+                </div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.summary }}</p>
+                <a href="services.html#{{ service.id }}" class="link-arrow">Learn more</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>{{ cta_section.headline }}</h2>
+        <p>{{ cta_section.text }}</p>
+        <a href="{{ cta_section.button_url }}" class="btn btn-primary">{{ cta_section.button_text }}</a>
+    </div>
+</section>
+{% endblock %}

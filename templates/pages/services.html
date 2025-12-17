@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>{{ page.headline }}</h1>
+        <p class="page-intro">{{ page.intro }}</p>
+    </div>
+</section>
+
+{% for service in services %}
+<section id="{{ service.id }}" class="service-detail {% if loop.index is odd %}section-light{% endif %}">
+    <div class="container">
+        <div class="service-detail-header">
+            <div class="service-icon-large">
+                <img src="{{ service.icon }}" alt="{{ service.title }} icon" width="80" height="80">
+            </div>
+            <div>
+                <h2>{{ service.title }}</h2>
+                <p class="service-summary">{{ service.description | trim }}</p>
+            </div>
+        </div>
+        
+        <div class="service-detail-grid">
+            <div class="service-features">
+                <h3>What we offer</h3>
+                <ul>
+                    {% for feature in service.features %}
+                    <li>{{ feature }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="service-outcomes">
+                <h3>Outcomes</h3>
+                <ul>
+                    {% for outcome in service.outcomes %}
+                    <li>{{ outcome }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+
+<section class="cta-section">
+    <div class="container">
+        <h2>{{ cta_section.headline }}</h2>
+        <p>{{ cta_section.text }}</p>
+        <a href="{{ cta_section.button_url }}" class="btn btn-primary">{{ cta_section.button_text }}</a>
+    </div>
+</section>
+{% endblock %}
