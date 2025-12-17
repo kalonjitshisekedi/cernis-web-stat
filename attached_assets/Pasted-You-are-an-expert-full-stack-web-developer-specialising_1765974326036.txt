@@ -1,0 +1,324 @@
+You are an expert full-stack web developer specialising in Python-based static site generation (Jinja2) and AWS static hosting. Your task is to build a complete, client-facing, professional static website for CERNIS (a B2B technology consultancy) inside Replit, with clean code, British English copy, and production-ready deployment documentation for AWS S3 + custom domain (domain already owned by the user).  
+
+IMPORTANT: Work in sequential numbered subtasks. Complete ONE subtask per response, then stop and output a “Checkpoint summary” so the user can safely continue later (including across Replit account switches). Do not jump ahead.
+
+──────────────────────────────────────────────────────────────────────────────
+Global requirements (non-negotiable)
+──────────────────────────────────────────────────────────────────────────────
+1) Technology and constraints
+- Static website only. No backend services, no databases, no server-side runtime after build.
+- Use Python + Jinja2 for templating. Avoid frameworks (no Flask/Frozen-Flask). Keep dependencies minimal.
+- Keep structure simple: one build script (`build.py`), one config/data file, a small set of templates, a single CSS file, minimal optional JS.
+- The generated site must work when hosted as plain files on AWS S3 static hosting and behind CloudFront.
+- Avoid external runtime dependencies (no CDN CSS frameworks). Prefer system fonts. If you must use an external font, make it optional and provide a fallback.
+
+2) Language and formatting rules
+- British English spelling and terminology throughout (colour, optimise, organisation, etc.).
+- All website headings and navigation labels must be sentence case (capitalise only first word and proper nouns). Example: “Our services”, not “Our Services”.
+- Tone: professional, B2B, outcome-led, focused on “cost savings” and “operational effectiveness”.
+
+3) Branding and design (must be consistent and accessible)
+- Use a modern, B2B-friendly palette with good contrast (WCAG 2.1 AA).
+- Use this palette (verify contrast in your CSS usage):
+  - Primary navy: #0B1F3B
+  - Navy hover/darker: #07162A
+  - Accent teal: #14B8A6
+  - Accent teal dark: #0F766E
+  - Text (primary): #0F172A
+  - Text (muted): #475569
+  - Background: #FFFFFF
+  - Background (subtle): #F8FAFC
+  - Borders: #E2E8F0
+- Logo and imagery: include clear placeholders (SVG placeholders included in repo). No actual brand logo required.
+- Layout: responsive, mobile-first, clean spacing, professional typography, clear calls-to-action.
+
+4) Pages required (minimum viable professional site)
+Generate these business pages (static HTML):
+- Home
+- Our services
+- About us
+- How we work
+- Case studies (with placeholders)
+- Insights (placeholder for future articles)
+- Contact
+- Privacy notice
+- Terms of use
+- 404 page
+
+5) SEO and basic web hygiene
+- Per-page <title> and meta description.
+- Open Graph meta tags (basic).
+- `robots.txt` and `sitemap.xml`.
+- Favicon placeholder.
+- Clear internal linking and active navigation state.
+
+6) Replit and continuity requirements
+- Assume Replit sessions can interrupt. After each subtask, create a save point:
+  - Update `STATE.md` with what is complete and what to do next.
+  - Provide a short “Resume instructions” section telling the user exactly what to run next.
+  - Recommend downloading a zip of the project at each checkpoint (or pushing to GitHub if available).
+
+7) Output format requirements (how you must respond)
+- In each subtask response, output:
+  A) Objective and deliverables
+  B) File tree changes
+  C) Full contents for every new/changed file (path + code block)
+  D) Commands to run in Replit shell
+  E) Checkpoint summary (including what to download/save)
+- Keep each subtask small enough to fit comfortably in one Replit work session.
+
+──────────────────────────────────────────────────────────────────────────────
+Company context to embed in site copy (use this to write content)
+──────────────────────────────────────────────────────────────────────────────
+Brand name: CERNIS (wordmark can be “CERNIS”; in running text you may use “Cernis” for readability).
+
+One-line positioning:
+“CERNIS helps organisations reduce technology costs and operate more effectively through integrated cloud, data and software solutions.”
+
+Core service pillars (must be clearly explained in “Our services” and referenced on home):
+1) Cloud infrastructure and management
+   - Azure and Microsoft ecosystem: Azure, Microsoft 365, SharePoint, Copilot integration
+   - AWS solutions for scalable compute-heavy workloads
+   - Security, compliance, and multi-cloud governance
+2) Data science and engineering
+   - Data pipelines and engineering
+   - Analytics dashboards and reporting
+   - Machine learning and predictive modelling
+3) Custom full-stack development
+   - Web and mobile applications
+   - System integration across cloud and data platforms
+
+Primary outcomes to emphasise everywhere:
+- Cost reduction (cloud optimisation, automation, reduced waste)
+- Operational effectiveness (faster processes, better decisions, improved reliability)
+
+──────────────────────────────────────────────────────────────────────────────
+Subtasks (execute sequentially)
+──────────────────────────────────────────────────────────────────────────────
+
+Subtask 1: Project setup and structure (Replit-ready)
+Objective:
+- Create a clean repository structure for a Python + Jinja2 static site generator project.
+
+Deliverables:
+- Minimal dependency setup (`requirements.txt`)
+- Folder structure: `templates/`, `static/`, `output/`, `docs/`
+- Central configuration/data file with placeholders for contact details and page definitions
+- A design guide document capturing palette, typography, and component rules
+- Continuity file `STATE.md` and a `README.md` with quick start instructions
+- `.gitignore` appropriate for Python and generated files
+
+Technical requirements:
+- Dependencies: Jinja2 only (plus its required transitive deps)
+- No Flask, no Frozen-Flask
+- Output directory should be excluded from version control (but include an empty placeholder file so the folder exists)
+
+Files to generate:
+- requirements.txt
+- README.md
+- STATE.md
+- DESIGN_GUIDE.md (or docs/DESIGN_GUIDE.md)
+- site_config.py (single source of truth for site metadata + navigation + content blocks)
+- .gitignore
+- output/.gitkeep
+
+Checkpoint:
+- After subtask 1, user should be able to: `pip install -r requirements.txt` without errors.
+
+STOP after subtask 1 and provide checkpoint summary.
+
+Subtask 2: Content architecture and site data
+Objective:
+- Populate `site_config.py` with structured content for all pages in British English, with sentence case headings.
+
+Deliverables:
+- Complete site metadata: site name, tagline, meta descriptions, social placeholders
+- Navigation structure (and footer links)
+- Reusable content blocks (service cards, process steps, outcomes, FAQs)
+- Placeholders for contact details (email/phone/address) without inventing personal info
+- Consistent CTA text and button labels
+
+Technical requirements:
+- All headings in sentence case
+- Copy must be concise, professional, outcome-led
+- Include compliance language where appropriate (privacy notice references POPIA at a high level)
+
+Files to generate/update:
+- site_config.py (updated)
+- docs/COPY_STYLE_GUIDE.md (brief rules: sentence case, British English, tone)
+
+Checkpoint:
+- `STATE.md` updated with “Content complete”.
+
+STOP after subtask 2 and provide checkpoint summary.
+
+Subtask 3: Templates and page layouts (Jinja2)
+Objective:
+- Build reusable Jinja2 templates and page templates.
+
+Deliverables:
+- `templates/base.html` with shared head, nav, footer
+- Page templates for each required page
+- Partials for nav and footer
+- Proper meta tags populated from config (title, description, OG tags)
+- Clear image/logo placeholders (commented and visible blocks)
+
+Technical requirements:
+- Semantic HTML5
+- Accessible navigation (keyboard focus styles to be added in CSS later)
+- Mobile-first layout structure
+- No inline CSS except minimal critical resets if needed (prefer CSS file)
+- All labels/headings sentence case
+
+Files to generate:
+- templates/base.html
+- templates/partials/nav.html
+- templates/partials/footer.html
+- templates/pages/*.html (one per page)
+
+Checkpoint:
+- Templates compile logically (build script comes later, but templates must be coherent).
+
+STOP after subtask 3 and provide checkpoint summary.
+
+Subtask 4: Styling and static assets
+Objective:
+- Create professional styling and basic interactivity with minimal JS.
+
+Deliverables:
+- `static/style.css` implementing the full palette and responsive layout
+- `static/main.js` for small enhancements only (e.g. mobile nav toggle)
+- SVG placeholders:
+  - static/logo-placeholder.svg
+  - static/hero-placeholder.svg
+  - static/service-cloud.svg
+  - static/service-data.svg
+  - static/service-dev.svg
+  - static/favicon.svg
+- Image usage guide doc (sizes and where to place real images later)
+
+Technical requirements:
+- WCAG-friendly contrast for text
+- Clear focus states for links/buttons
+- Use system font stack
+- Respect `prefers-reduced-motion`
+- Keep CSS in one file; avoid heavy animations
+
+Files to generate:
+- static/style.css
+- static/main.js
+- static/*.svg placeholders
+- docs/IMAGES_GUIDE.md
+
+Checkpoint:
+- Visual consistency and responsive behaviour can be validated after build in subtask 5.
+
+STOP after subtask 4 and provide checkpoint summary.
+
+Subtask 5: Static site build pipeline and local testing
+Objective:
+- Implement a reliable build script that renders templates into `output/` and copies static assets.
+
+Deliverables:
+- `build.py` that:
+  - Loads config from `site_config.py`
+  - Renders each page to a final HTML file in `output/`
+  - Copies `static/` into `output/static/`
+  - Generates `output/robots.txt` and `output/sitemap.xml`
+  - Writes `output/404.html`
+- `docs/TESTING_CHECKLIST.md` to validate links, layout, and accessibility basics
+- Basic local testing instructions using Python’s http.server
+
+Technical requirements:
+- Use Jinja2 `Environment` + `FileSystemLoader`
+- Fail fast with helpful errors if templates/data missing
+- Keep generated paths simple (root-level HTML files, e.g. `services.html`), to avoid S3/CloudFront rewrite complexity
+
+Files to generate:
+- build.py
+- docs/TESTING_CHECKLIST.md
+- output/* (generated)
+
+Checkpoint:
+- Running `python build.py` produces a complete `output/` ready to upload to S3.
+
+STOP after subtask 5 and provide checkpoint summary.
+
+Subtask 6: Final QA pass and production polish
+Objective:
+- Tighten copy, verify sentence case everywhere, and ensure the site feels finished.
+
+Deliverables:
+- Final copy edits (British English consistency)
+- Ensure navigation highlights current page
+- Validate that placeholders are present and clearly labelled
+- Add a small “Start a conversation” CTA section consistently
+- Add a simple “Skip to content” link for accessibility
+- Create `docs/RELEASE_NOTES.md` with what’s included and how to update content later
+
+Technical requirements:
+- No new dependencies
+- Keep changes minimal and focused on quality
+
+Files to update:
+- templates and CSS as needed
+- docs/RELEASE_NOTES.md
+
+Checkpoint:
+- Site feels professional and client-ready when served from `output/`.
+
+STOP after subtask 6 and provide checkpoint summary.
+
+Subtask 7: AWS deployment and domain linking documentation (post-Replit execution)
+Objective:
+- Write clear, step-by-step deployment documentation for AWS S3 + custom domain linking, with HTTPS recommended.
+
+Deliverables:
+- `docs/DEPLOYMENT_GUIDE.md` including:
+  - Option A (simplest): Public S3 static website hosting + DNS to S3 website endpoint (HTTP)
+  - Option B (recommended): S3 + CloudFront + ACM certificate + DNS to CloudFront (HTTPS)
+  - How to upload updates using AWS CLI (`aws s3 sync output/ s3://... --delete`)
+  - Cache invalidation notes for CloudFront
+  - Common pitfalls checklist (index/error docs, permissions, MIME types, 404 handling)
+  - Post-deployment verification checklist
+- `docs/DOMAIN_AND_EMAIL_NOTES.md` including:
+  - Domain linking concepts (A/AAAA ALIAS, CNAME, www vs apex)
+  - Email is separate: MX/SPF/DKIM/DMARC guidance at a high level, and a reminder to configure with chosen provider (Microsoft 365 / Google Workspace / other)
+
+Technical requirements:
+- Keep instructions generic enough to work with Route 53 or any DNS provider
+- Don’t require creating backend services
+- Clearly mark domain and email as post-deployment tasks done outside Replit
+
+Files to generate:
+- docs/DEPLOYMENT_GUIDE.md
+- docs/DOMAIN_AND_EMAIL_NOTES.md
+
+Checkpoint:
+- A non-technical user can follow the steps successfully.
+
+STOP after subtask 7 and provide checkpoint summary.
+
+Subtask 8: Packaging, handover, and continuity checklist
+Objective:
+- Make it easy to hand off the project or resume later.
+
+Deliverables:
+- Update `README.md` with final quick start + build + deploy summary
+- Add a “How to update content” section (edit `site_config.py` then run `python build.py`)
+- Add a final continuity checklist:
+  - What to download (project zip + output zip)
+  - What to record (bucket name, CloudFront distribution id, DNS records)
+  - What to do next after a Replit account switch
+
+Files to update:
+- README.md
+- STATE.md (final state)
+- docs/HANDOVER_CHECKLIST.md
+
+STOP after subtask 8 and provide checkpoint summary.
+
+──────────────────────────────────────────────────────────────────────────────
+Start now
+──────────────────────────────────────────────────────────────────────────────
+
