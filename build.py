@@ -10,13 +10,15 @@ Usage:
 Output:
     - HTML files in output/
     - Static assets in output/static/
-    - robots.txt and sitemap.xml in output/
+    - robots.txt, sitemap.xml, and feed.xml in output/
+    - Blog posts in output/blog/
 """
 
 import os
 import shutil
 from datetime import datetime
 from pathlib import Path
+from xml.sax.saxutils import escape
 
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
@@ -107,6 +109,7 @@ def render_pages(env):
         page_config = get_page_config(page_id)
 
         # Build context
+        blog_posts = getattr(site_config, 'BLOG_POSTS', [])
         context = {
             'site': site_config.SITE,
             'contact': site_config.CONTACT,
@@ -117,6 +120,7 @@ def render_pages(env):
             'key_outcomes': site_config.KEY_OUTCOMES,
             'case_studies': site_config.CASE_STUDIES,
             'cta_section': site_config.CTA_SECTION,
+            'blog_posts': blog_posts,
             'page': page_config,
             'current_page': page_id,
             'current_year': datetime.now().year,
@@ -156,6 +160,15 @@ def generate_sitemap():
     <priority>{priority}</priority>
   </url>""")
 
+    # Add blog posts to sitemap
+    blog_posts = getattr(site_config, 'BLOG_POSTS', [])
+    for post in blog_posts:
+        urls.append(f"""  <url>
+    <loc>{base_url}/blog/{post['slug']}.html</loc>
+    <lastmod>{post['date']}</lastmod>
+    <priority>0.7</priority>
+  </url>""")
+
     sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {chr(10).join(urls)}
@@ -163,6 +176,89 @@ def generate_sitemap():
 """
     (OUTPUT_DIR / 'sitemap.xml').write_text(sitemap, encoding='utf-8')
     print("  Generated sitemap.xml")
+
+
+def render_blog_posts(env):
+    """Render individual blog post pages."""
+    blog_posts = getattr(site_config, 'BLOG_POSTS', [])
+    if not blog_posts:
+        print("  No blog posts to render")
+        return
+
+    # Create blog directory
+    blog_dir = OUTPUT_DIR / 'blog'
+    blog_dir.mkdir(exist_ok=True)
+
+    try:
+        template = env.get_template('pages/blog-post.html')
+    except TemplateNotFound:
+        print("  Error: Blog post template not found")
+        return
+
+    for post in blog_posts:
+        context = {
+            'site': site_config.SITE,
+            'contact': site_config.CONTACT,
+            'nav_items': site_config.NAV_ITEMS,
+            'footer_links': site_config.FOOTER_LINKS,
+            'cta_section': site_config.CTA_SECTION,
+            'post': post,
+            'page': {
+                'title': f"{post['title']} | {site_config.SITE['name']}",
+                'meta_description': post['meta_description'],
+                'og_title': post['title'],
+                'og_description': post['summary'],
+            },
+            'current_page': 'insights',
+            'canonical_url': f"{site_config.SITE['url']}/blog/{post['slug']}.html",
+            'current_year': datetime.now().year,
+        }
+
+        html = template.render(**context)
+        output_path = blog_dir / f"{post['slug']}.html"
+        output_path.write_text(html, encoding='utf-8')
+        print(f"  Generated blog/{post['slug']}.html")
+
+
+def generate_rss_feed():
+    """Generate RSS feed (feed.xml) for blog posts."""
+    blog_posts = getattr(site_config, 'BLOG_POSTS', [])
+    if not blog_posts:
+        print("  No blog posts for RSS feed")
+        return
+
+    base_url = site_config.SITE['url']
+    site_name = site_config.SITE['name']
+    site_description = site_config.SITE['description']
+    build_date = datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0200')
+
+    items = []
+    for post in sorted(blog_posts, key=lambda x: x['date'], reverse=True):
+        pub_date = datetime.strptime(post['date'], '%Y-%m-%d').strftime('%a, %d %b %Y 00:00:00 +0200')
+        items.append(f"""    <item>
+      <title>{escape(post['title'])}</title>
+      <link>{base_url}/blog/{post['slug']}.html</link>
+      <description>{escape(post['summary'])}</description>
+      <pubDate>{pub_date}</pubDate>
+      <guid isPermaLink="true">{base_url}/blog/{post['slug']}.html</guid>
+      <category>{escape(post['category'])}</category>
+    </item>""")
+
+    rss = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{escape(site_name)} Insights</title>
+    <link>{base_url}</link>
+    <description>{escape(site_description)}</description>
+    <language>en-za</language>
+    <lastBuildDate>{build_date}</lastBuildDate>
+    <atom:link href="{base_url}/feed.xml" rel="self" type="application/rss+xml"/>
+{chr(10).join(items)}
+  </channel>
+</rss>
+"""
+    (OUTPUT_DIR / 'feed.xml').write_text(rss, encoding='utf-8')
+    print("  Generated feed.xml (RSS)")
 
 
 def main():
@@ -190,9 +286,13 @@ def main():
     print("\n3. Rendering pages...")
     render_pages(env)
 
-    print("\n4. Generating SEO files...")
+    print("\n4. Rendering blog posts...")
+    render_blog_posts(env)
+
+    print("\n5. Generating SEO files...")
     generate_robots_txt()
     generate_sitemap()
+    generate_rss_feed()
 
     print("\n" + "=" * 40)
     print("Build complete!")

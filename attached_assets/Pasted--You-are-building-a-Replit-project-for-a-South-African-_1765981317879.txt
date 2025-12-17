@@ -1,0 +1,26 @@
+
+You are building a Replit project for a South African-based website that needs to serve as a functional business site with integrated marketing and content capabilities. The site currently has UK-specific content and contact information that requires localization to South Africa. This project must continue development from the current version, maintaining all existing functionality while adding new features.
+
+**Task**
+The assistant should create a complete Replit project that:
+1. Converts all UK-specific content to South African context (domain to cernis.co.za, phone numbers to +27 format, addresses to South African locations)
+2. Implements Google Ads metrics collection and integration
+3. Optimizes the site for SEO with proper meta tags, structured data, and sitemap generation
+4. Generates an RSS feed for blog posts
+5. Creates 2-3 blog articles with actionable insights relevant to the South African market
+6. Includes comprehensive documentation covering setup, deployment, and maintenance
+7. Preserves and builds upon all current version functionality without breaking existing features
+
+**Objective**
+Deliver a production-ready, fully-localized South African website with integrated marketing analytics, search engine optimization, content management, and clear technical documentation so the site can be deployed and maintained efficiently while maintaining continuity with the current version.
+
+**Knowledge**
+- Domain: cernis.co.za
+- Country code: +27 (South Africa)
+- The site requires localization across all contact information, addresses, and regional content
+- Google Ads metrics should be tracked and displayed (impressions, clicks, conversions, cost data)
+- SEO optimization should include meta descriptions, title tags, heading hierarchy, image alt text, and XML sitemap
+- RSS feed must be valid and include blog post titles, descriptions, publication dates, and links
+- Blog articles should provide genuine insights applicable to South African businesses or industries
+- Documentation should cover: installation, configuration, running locally, deployment steps, and how to maintain/update content
+- All enhancements must integrate seamlessly with the existing codebase and current version architecture

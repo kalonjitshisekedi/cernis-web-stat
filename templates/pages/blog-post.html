@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{ post.title }}",
+    "description": "{{ post.summary }}",
+    "author": {
+        "@type": "Organization",
+        "name": "{{ post.author }}"
+    },
+    "datePublished": "{{ post.date }}",
+    "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.name }}",
+        "url": "{{ site.url }}"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ site.url }}/blog/{{ post.slug }}.html"
+    }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<article class="blog-post">
+    <header class="blog-post__header">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a> / 
+                <a href="insights.html">Insights</a> / 
+                <span>{{ post.title }}</span>
+            </nav>
+            <h1>{{ post.title }}</h1>
+            <div class="blog-post__meta">
+                <span class="blog-post__category">{{ post.category }}</span>
+                <span class="blog-post__date">{{ post.date }}</span>
+                <span class="blog-post__read-time">{{ post.read_time }}</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="blog-post__content">
+            {{ post.content | safe }}
+        </div>
+        
+        <footer class="blog-post__footer">
+            <div class="blog-post__author">
+                <p>Written by <strong>{{ post.author }}</strong></p>
+            </div>
+            <div class="blog-post__cta">
+                <p>Have questions about this topic? <a href="contact.html">Get in touch</a> with our team.</p>
+            </div>
+        </footer>
+    </div>
+</article>
+
+<section class="section section--cta">
+    <div class="container">
+        <h2>{{ cta_section.headline }}</h2>
+        <p>{{ cta_section.text }}</p>
+        <a href="{{ cta_section.button_url }}" class="btn btn--primary">{{ cta_section.button_text }}</a>
+    </div>
+</section>
+{% endblock %}

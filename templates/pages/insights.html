@@ -8,12 +8,33 @@
     </div>
 </section>
 
-<section class="insights-placeholder">
+<section class="insights-list">
     <div class="container">
+        {% if blog_posts %}
+        <div class="blog-grid">
+            {% for post in blog_posts %}
+            <article class="blog-card">
+                <div class="blog-card__content">
+                    <span class="blog-card__category">{{ post.category }}</span>
+                    <h2 class="blog-card__title">
+                        <a href="blog/{{ post.slug }}.html">{{ post.title }}</a>
+                    </h2>
+                    <p class="blog-card__summary">{{ post.summary }}</p>
+                    <div class="blog-card__meta">
+                        <span class="blog-card__date">{{ post.date }}</span>
+                        <span class="blog-card__read-time">{{ post.read_time }}</span>
+                    </div>
+                    <a href="blog/{{ post.slug }}.html" class="blog-card__link">Read more</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
         <div class="coming-soon-card">
             <h2>Coming soon</h2>
             <p>{{ page.coming_soon }}</p>
         </div>
+        {% endif %}
     </div>
 </section>
 

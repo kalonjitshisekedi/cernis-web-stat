@@ -1,24 +1,78 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en-ZA">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
     <meta name="description" content="{{ page.meta_description }}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{% if canonical_url %}{{ canonical_url }}{% else %}{{ site.url }}/{% if current_page == 'home' %}index.html{% else %}{{ current_page }}.html{% endif %}{% endif %}">
     
     <!-- Open Graph -->
     <meta property="og:title" content="{{ page.og_title | default(page.title) }}">
     <meta property="og:description" content="{{ page.og_description | default(page.meta_description) }}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ site.url }}/{{ current_page }}.html">
+    <meta property="og:url" content="{% if canonical_url %}{{ canonical_url }}{% else %}{{ site.url }}/{% if current_page == 'home' %}index.html{% else %}{{ current_page }}.html{% endif %}{% endif %}">
     <meta property="og:locale" content="{{ site.locale }}">
     <meta property="og:site_name" content="{{ site.name }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ site.twitter }}">
+    <meta name="twitter:title" content="{{ page.og_title | default(page.title) }}">
+    <meta name="twitter:description" content="{{ page.og_description | default(page.meta_description) }}">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
     
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} Insights" href="{{ site.url }}/feed.xml">
+    
     <!-- Stylesheet -->
     <link rel="stylesheet" href="static/style.css">
+    
+    <!-- Google Analytics (gtag.js) -->
+    {% if site.google_analytics_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics_id }}');
+        {% if site.google_ads_id %}
+        gtag('config', '{{ site.google_ads_id }}');
+        {% endif %}
+    </script>
+    {% endif %}
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ site.name }}",
+        "url": "{{ site.url }}",
+        "description": "{{ site.description }}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "{{ contact.address.line1 }}",
+            "addressLocality": "{{ contact.address.city }}",
+            "addressRegion": "{{ contact.address.province }}",
+            "postalCode": "{{ contact.address.postcode }}",
+            "addressCountry": "ZA"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "{{ contact.phone }}",
+            "email": "{{ contact.email }}",
+            "contactType": "customer service"
+        },
+        "sameAs": [
+            "https://twitter.com/{{ site.twitter | replace('@', '') }}"
+        ]
+    }
+    </script>
+    {% block structured_data %}{% endblock %}
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to content</a>
